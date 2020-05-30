@@ -40,11 +40,19 @@ Demonstrate your understanding of this week's concepts by answering the followin
 
 - [ ] Explain the difference between `Relational Databases` and `SQL`.
 
+Relational Databases is a type of database where data are stored in tabular format and grouped in rows and columns. SQL that stand for Standard Query Language is a language used to communicate with databases.
+
 - [ ] Why do tables need a `primary key`?
+
+Primary keys are used to uniquely identify each row. It is usually represented as autoincrementing integer called id and it is one of the requirement each table should meet.
 
 - [ ] What is the name given to a table column that references the primary key on another table.
 
+It is foreign key that we usually name with the reference table name with id.
+
 - [ ] What do we need in order to have a _many to many_ relationship between two tables.
+
+We need to create intermediary, bridge, table that holds foreign keys that reference the primary key on the related tables
 
 ## Minimum Viable Product
 
