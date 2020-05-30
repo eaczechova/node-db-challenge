@@ -16,8 +16,18 @@ function addProject(project) {
 		});
 }
 
+function findAllForProject(id) {
+	return db('projects')
+		.join('tasks', 'tasks.project_id', 'projects.id')
+		.join('projects_resources', 'projects_resources.project_id', 'projects.id')
+		.join('resources', 'projects_resources.project_id', 'resources.id')
+		.select('*')
+		.where({ 'projects.id': id });
+}
+
 module.exports = {
 	getProjects,
 	findProjectById,
 	addProject,
+	findAllForProject,
 };

@@ -25,4 +25,22 @@ router.post('/', (req, res) => {
 		});
 });
 
+router.get('/:id', (req, res) => {
+	const { id } = req.params;
+	console.log(id);
+	Projects.findAllForProject(id)
+		.then((projects) => {
+			if (projects.length) {
+				res.json(projects);
+			} else {
+				res
+					.status(404)
+					.json({ message: 'Could not find data for the given project' });
+			}
+		})
+		.catch((err) => {
+			res.status(500).json({ message: 'Failed to get project data' });
+		});
+});
+
 module.exports = router;
