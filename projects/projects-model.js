@@ -16,13 +16,17 @@ function addProject(project) {
 		});
 }
 
-function findAllForProject(id) {
-	return db('projects')
-		.join('tasks', 'tasks.project_id', 'projects.id')
-		.join('projects_resources', 'projects_resources.project_id', 'projects.id')
-		.join('resources', 'projects_resources.project_id', 'resources.id')
+async function findAllForProject(id) {
+	const projects = await db('projects').select('*').where({ 'projects.id': id });
+	const tasks = await db('tasks').select('*').where({ project_id: id });
+	const resources = await db('resources')
 		.select('*')
-		.where({ 'projects.id': id });
+		.join('projects_resources', 'projects_resources.resource_id', 'resources.id')
+		.where({ 'projects_resources.project_id': id });
+
+	const result = [...projects, { tasks }, { resources }];
+
+	return result;
 }
 
 module.exports = {

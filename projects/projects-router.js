@@ -27,11 +27,12 @@ router.post('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
 	const { id } = req.params;
-	console.log(id);
+
 	Projects.findAllForProject(id)
 		.then((projects) => {
+			const result = Object.assign(projects[0], projects[1], projects[2]);
 			if (projects.length) {
-				res.json(projects);
+				res.json(result);
 			} else {
 				res
 					.status(404)
